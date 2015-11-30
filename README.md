@@ -34,10 +34,10 @@ let two = 2       // Int
 let negSeven = -7 // Int
 let twoPointZero = 2.0 // Double
 let pi = 3.14159       // Double
-let isTrue = True    // Boolean
-let isFalse = False  // Boolean
+let isTrue = True    // Bool
+let isFalse = False  // Bool
 ```
-**Advanced:** *Unsigned integers are available as* `UInt` *but require explicit-typing to declare, which we'll cover later. Apple discourages widespread use of* `UInt`, *even for values that can only be positive.*
+**Advanced:** *Unsigned integers are available as* `UInt` *but require explicit-typing to declare, which we'll cover later.*
 
 ## Operators
 
@@ -45,9 +45,9 @@ Since Swift is a C-family language, the typical C operators are available with t
 
 A couple of notable distinctions in Swift are that:
 
-1. The assignment operator (`=`) no longer returns a boolean value, which makes it more difficult to accidentally type an assignment operator into an evaluation instead of a comparison operator.
+1. The assignment operator (`=`) no longer returns a value, which makes it more difficult to accidentally type an assignment operator into an evaluation instead of a comparison operator.
 
-2. Swift includes the normal comparison operators `==` (a.k.a. "double equals") and `!=` ("not equal to") which measure whether or not two instances hold the *same value*, **and** includes two *identity* operators, `===` (a.k.a. "triple equals") and `!==` ("not identical to") which measure whether two instances are the *exact same reference.*
+2. Swift includes the normal comparison operators `==` (a.k.a. "double equals") and `!=` ("not equal to") which measure whether or not two instances hold the *same value*, **and** includes two *identity* operators, `===` (a.k.a. "triple equals") and `!==` ("not identical to") which measure whether two variables reference the *exact same object.*
 
 Reference the [Basic Operators chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-ID60) of Apple's documentation for detailed information.
 
@@ -127,4 +127,4 @@ This will print: `Hello, welcome to the world.`
 
 **Note:** *You may see* `println()` *("print line") used in examples online, which is no longer available in Swift 2.0. Originally, the* `print()` *function did not append a newline character so* `println()` *was provided as an alternative which did. Swift 2's* `print()` *function, however, automatically appends a newline so* `println()` *was considered redundant and removed.*
 
-**Objective-C:** `NSLog()` *is actually available in Swift, however, it requires more resources to process than using the native* `print()` *function in part because* `print()` *does not prepend the project name and time stamp to the string sent to LLDB.*
+**Objective-C:** `NSLog()` *is still available in Swift. However, it's a little more typing than* `print()` *since you still need to give a format specifier in the first argument. For example:* `NSLog("%@", greeting + " the world.")` *.*
