@@ -128,3 +128,5 @@ This will print: `Hello, welcome to the world.`
 **Note:** *You may see* `println()` *("print line") used in examples online, which is no longer available in Swift 2.0. Originally, the* `print()` *function did not append a newline character so* `println()` *was provided as an alternative which did. Swift 2's* `print()` *function, however, automatically appends a newline so* `println()` *was considered redundant and removed.*
 
 **Objective-C:** `NSLog()` *is still available in Swift. However, it's a little more typing than* `print()` *since you still need to give a format specifier in the first argument. For example:* `NSLog("%@", greeting + " the world.")` *.*
+
+<a href='https://learn.co/lessons/swift-constants-and-variables' data-visibility='hidden'>View this lesson on Learn.co</a>
