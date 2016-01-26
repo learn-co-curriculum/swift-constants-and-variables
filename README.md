@@ -2,32 +2,29 @@
 
 ## Objectives
 
-1. Distinguish instances created with `let` or `var`.
+1. Distinguish between uses of `let` and `var`.
 2. Create instances of the basic value types and strings.
-3. Overview Swift operators and the new identity operators `===` and `!==`.
-4. Use the string literal `""` to create a string instance.
-5. Concatenate strings with the overridden addition operator `+`.
+3. Become familiar with Swift operators and the new identity operators `===` and `!==`.
+4. Use string literals to create string instances.
+5. Concatenate strings with the addition operator `+`.
 6. Interpolate strings with the literal syntax, `\()`.
-7. Print instances to the debug console using the `print()` function.
+7. Print values to the debug console using the `print()` function.
 
 ## `let` & `var`
 
-![](https://curriculum-content.s3.amazonaws.com/swift/swift-constants-and-variables/bioshock_bird_and_cage.jpg)  
-— Bird and Cage pendant, fan art jewelry for *Bioshock Infinite* by [leagueOfShadows](https://www.etsy.com/listing/128142086/bioshock-infinite-birdcage-necklace?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=bioshock%20cage%20bird&ref=sr_gallery_1)
+Swift employs the keywords `let` and `var` for naming variables. The `let` keyword declares a *constant*, meaning that it cannot be re-assigned after it's been created (though its variable properties *can* be altered later). The `var` keyword declares a new *variable*, meaning that the value it holds *can* be changed at a later time.
 
-Swift employs the keywords `let` and `var` for naming instances. The `let` keyword declares an instance as a *constant*, meaning that it cannot be overwritten after it's been created (though its variable properties *can* be altered later). The `var` keyword declares an instance as a *variable*, meaning that it *can* be changed at a later time.
-
-**Objective-C:** *Swift's use of the word "constant" is not a direct translation from Objective-C's "constant", which takes the form of a globally-accessible value. Swift's terminology for "constant" and "variable" is synonymous to Objective-C's use of "immutable" and "mutable".*
+**Terminology note:** Things get a little weird here. Names for values are universally called "variables". Even though that term in English implies something that can be changed ("vary-able"), in Swift, describing something as a "constant variable" makes a certain amount of sense. Both `let x = 5` and `var x = 5` make a new variable called `x` which starts with the value `5`. The only difference between the two is that it is illegal to reassign the `let`-declared `x` later. A way around this linguistic conundrum would be to describe things declared with `let` as "constants", and the others as "variables", but that's just not the way developers speak. Just keep in mind that if we describe something as a "variable", we don't necessarily mean it was declared with `var`.
 
 The first section of [The Basics chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html) in Apple's Swift programming guide discusses these keywords in more detail.
 
 ### Implicit Typing
 
-When creating instances, the compiler will infer the type of the instance you are creating based upon the instance's initial assignment. The compiler will enforce that future uses of any given instance fall into accordance with the instance's type. Any variables created with `var` can only be reassigned to a value of that same type (i.e. a string value cannot be assigned to an integer instance).
+When creating variables, the compiler will infer the type of the variable you are creating based upon the initial assignment. The compiler will enforce that future reassignments of the variable are of the same type. For instance, a variable declared to initially hold a string (say, `var name = "Lou"`) cannot later be assigned a value of any type other than a string (for instance, typing `name = 5` later is a compiler error).
 
 ### Value Types
 
-Objective-C programmers are all too familiar with distinguishing primitives from objects. Swift has no such distinction: integers, floats, and booleans are all held as objects. The value types `Int` (integer), `Double` (floating-point), and `Bool` (boolean) are typed implicitly based upon initial assignment:
+Objective-C programmers are all too familiar with distinguishing primitives from objects. Swift has no such distinction: integers, floats, and booleans are all effectively objects. The types `Int` (integer), `Double` (floating-point), and `Bool` (boolean) are typed implicitly based upon initial assignment:
 
 ```swift
 let two = 2       // Int
@@ -37,7 +34,7 @@ let pi = 3.14159       // Double
 let isTrue = True    // Bool
 let isFalse = False  // Bool
 ```
-**Advanced:** *Unsigned integers are available as* `UInt` *but require explicit-typing to declare, which we'll cover later.*
+**Advanced:** *Unsigned integers are available as* `UInt` *but require explicit typing to declare, which we'll cover later.*
 
 ## Operators
 
@@ -45,17 +42,21 @@ Since Swift is a C-family language, the typical C operators are available with t
 
 A couple of notable distinctions in Swift are that:
 
-1. The assignment operator (`=`) no longer returns a value, which makes it more difficult to accidentally type an assignment operator into an evaluation instead of a comparison operator.
+1. The assignment operator (`=`) no longer returns a value, which makes it more difficult to accidentally type an assignment in an `if`-statement when you meant to use `==`.
 
-2. Swift includes the normal comparison operators `==` (a.k.a. "double equals") and `!=` ("not equal to") which measure whether or not two instances hold the *same value*, **and** includes two *identity* operators, `===` (a.k.a. "triple equals") and `!==` ("not identical to") which measure whether two variables reference the *exact same object.*
+2. Swift includes the normal comparison operators `==` (a.k.a. "double equals") and `!=` ("not equal to") to determine whether two instances are conceptually equal. Yes, Objective-C developers, you can now type `"a" == "a"` and have it do the right thing! No need to use `isEqualToString:` any more.
+
+3. In the same vein as `==` being useful for objects, many other operators now do handy things. For instance, `+` can be used to concatenate two strings. We'll see that shortly.
+
+3. There are two new *identity* operators in Swift, `===` (a.k.a. "triple equals") and `!==` ("not identical to") which measure whether two variables reference the *exact same object.* You probably won't need to use these, but they're around just in case.
 
 Reference the [Basic Operators chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-ID60) of Apple's documentation for detailed information.
 
 ## Strings
 
-### The String Literal `""`
+### String Literals
 
-In Swift, the string literal uses a pair of double-quotes to encapsulate its text value which can be assigned to an instance declared with either `let` or `var` (among many other uses):
+Swift uses a pair of double-quotes to enclose a literal string (a value of type `String`):
 
 ```swift
 var greeting = "Welcome to"
@@ -75,7 +76,7 @@ flatiron = "the Main Campus"   // error
 
 ### String Concatenation with `+`
 
-Swift allows for custom uses of certain operators, which means that the addition operator (`+`) has been overridden for use with string literals to serve as a "concatenation literal". For programmers with experience using Ruby or Python, this will feel very familiar:
+Swift allows classes to declare how operators should behave on them. That means, for instance, the addition operator (`+`) can be used to join two strings together. For programmers with experience using Ruby or Python, this will feel very familiar:
 
 ```swift
 let message = greeting + flatiron
@@ -86,13 +87,13 @@ The `message` instance will now hold the awkward string value `"Hello, welcome t
 ```swift
 let message = greeting + " " + flatiron + "."
 ```
-The `message` instance will now hold the string value `"Hello, welcome to the Flatiron School."`. This concatenation literal can mix string instances with string literals without penalty.
+The `message` instance will now hold the string value `"Hello, welcome to the Flatiron School."`.
 
 ### String Interpolation with `"\()"`
 
-Swift also allows string interpolation to be done with a literal syntax as well. In stark contrast to the messy Objective-C syntax of matching format specifiers up with variable names, Swift allows an instance to be passed directly into a string literal with the interpolation syntax `\(instanceName)`.
+Swift allows string interpolation to be done inside a literal. In stark contrast to the messy Objective-C syntax of matching format specifiers up with variable names, Swift allows a value to be used directly into a string literal with the interpolation syntax `\(value)`.
 
-This means we can create our `message` instance without concatenation by passing the `greeting` and `flatiron` instances directly into a new string literal:
+This means we can create our `message` without concatenation by using the `greeting` and `flatiron` variables directly into a new string literal:
 
 ```swift
 let message = "\(greeting) \(flatiron)."
@@ -103,7 +104,7 @@ Reference the [Strings and Characters chapter](https://developer.apple.com/libra
 
 ## Printing An Instance to the Debug Console
 
-Swift's `print()` function will send a string representation of any instance to the debug console. It can be sent an instance directly, or be sent a string literal which may or may not include interpolation arguments:
+Swift's `print()` function will send a string representation of any value to the debug console. It can be sent an instance directly, or be sent a string literal which may or may not include interpolation arguments:
 
 ```swift
 print(message)
