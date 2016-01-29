@@ -130,4 +130,4 @@ This will print: `Hello, welcome to the world.`
 
 **Objective-C:** `NSLog()` *is still available in Swift. However, it's a little more typing than* `print()` *since you still need to give a format specifier in the first argument. For example:* `NSLog("%@", greeting + " the world.")` *.*
 
-<a href='https://learn.co/lessons/swift-constants-and-variables' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/swift-constants-and-variables' title='Swift constants and variables'>Swift constants and variables</a> on Learn.co and start learning to code for free.</p>
